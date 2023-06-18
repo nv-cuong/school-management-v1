@@ -11,7 +11,22 @@ class AuthController extends Controller
     {
         if (!empty(Auth::check()))
         {
-            return redirect('admin/dashboard');
+            if(Auth::user()->user_type == 1)
+            {
+                return redirect('admin/dashboard');
+            }
+            else if(Auth::user()->user_type == 2)
+            {
+                return redirect('teacher/dashboard');
+            }
+            else if(Auth::user()->user_type == 3)
+            {
+                return redirect('student/dashboard');
+            }
+            else if(Auth::user()->user_type == 4)
+            {
+                return redirect('parent/dashboard');
+            }
         }
         return view('auth.login');
     }
@@ -22,7 +37,22 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) 
         {
-            return redirect('admin/dashboard');
+            if(Auth::user()->user_type == 1)
+            {
+                return redirect('admin/dashboard');
+            }
+            else if(Auth::user()->user_type == 2)
+            {
+                return redirect('teacher/dashboard');
+            }
+            else if(Auth::user()->user_type == 3)
+            {
+                return redirect('student/dashboard');
+            }
+            else if(Auth::user()->user_type == 4)
+            {
+                return redirect('parent/dashboard');
+            }
         } 
         else 
         {
