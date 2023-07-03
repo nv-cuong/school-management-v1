@@ -15,28 +15,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -141,10 +119,10 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="javascript:;" class="brand-link">
         <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">School Management</span>
     </a>
 
     <!-- Sidebar -->
@@ -166,7 +144,8 @@
 
                 @if (Auth::user()->user_name == 1)
                     <li class="nav-item">
-                        <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                        <a href="{{ url('admin/dashboard') }}" 
+                            class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -174,7 +153,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/admin/list') }}" class="nav-link">
+                        <a href="{{ url('admin/admin/list') }}" 
+                            class="nav-link @if (Request::segment(2) == 'admin') active @endif">
                             <i class="nav-icon far fa-user"></i>
                             <p>
                                 Admins
@@ -183,7 +163,8 @@
                     </li>
                 @elseif (Auth::user()->user_name == 2)
                     <li class="nav-item">
-                        <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                        <a href="{{ url('admin/dashboard') }}" 
+                            class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -192,7 +173,8 @@
                     </li>
                 @elseif (Auth::user()->user_name == 3)
                     <li class="nav-item">
-                        <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                        <a href="{{ url('admin/dashboard') }}" 
+                            class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -201,7 +183,8 @@
                     </li>
                 @elseif (Auth::user()->user_name == 4)
                     <li class="nav-item">
-                        <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                        <a href="{{ url('admin/dashboard') }}" 
+                            class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard

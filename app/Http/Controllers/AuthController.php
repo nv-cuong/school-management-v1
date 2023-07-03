@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -64,5 +69,59 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect(url(''));
+    }
+
+    public function forgotPassword()
+    {
+        return view('auth.forgot');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::getEmailSingle($request->email);
+        if(!empty($user))
+        {
+            $user->remember_token = Str::random(30);
+            $user->save();
+
+            Mail::to($user->email->send(new ForgotPasswordMail($user)));
+
+            return redirect()->back()->with('success', "Hãy kiểm tra mail của bạn và thay đổi mật khẩu!");
+        }
+        else
+        {
+            return redirect()->back()->with('error', "Không tìm thấy địa chỉ email!");
+        }
+    }
+
+    public function reset($remember_token)
+    {
+        $user = User::getTokenSingle($remember_token);
+        if(!empty($user))
+        {
+            $data['user'] = $user;
+            return view('auth.reset', $data);
+        }
+        else
+        {
+            abort(404);
+        }
+    }
+
+    public function postReset($token, Request $request)
+    {
+        if($request->password == $request->confirm_password)
+        {
+            $user = User::getTokenSingle($token);
+            $user->password = Hash::make($request->password);
+            $user->remember_token = Str::random(30);
+            $user->save();
+
+            return redirect(url(''))->with('success', 'Thay đổi mật khẩu thành công.');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Mật khẩu và mật khẩu nhập lại không trùng khớp.');
+        }
     }
 }

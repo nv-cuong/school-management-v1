@@ -19,9 +19,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [AuthController::class, 'login']);
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'authLogin']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+Route::post('change-password', [AuthController::class, 'changePassword'])->name('change-password');
+Route::post('reset/{token}', [AuthController::class, 'reset'])->name('reset');
+Route::post('reset/{token}', [AuthController::class, 'postReset'])->name('postReset');
 
 Route::get('admin/admin/list', function () {
     return view('admin.admin.list');
