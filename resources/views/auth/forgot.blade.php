@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng nhập</title>
+    <title>Đổi mật khẩu</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -21,13 +21,12 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Admin</b></a>
+                <a href="" class="h1"><b>Đổi mật khẩu</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Đăng nhập để bắt đầu</p>
 
                 @include('_message')
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ url('login') }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" required name="email" placeholder="Email">
@@ -37,31 +36,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="remember">
-                                <label for="remember">
-                                    Nhớ mật khẩu
-                                </label>
-                            </div>
-                        </div>
+
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                            <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
                         </div>
                     </div>
                 </form>
 
                 <p class="mb-1">
-                    <a href="{{ route('forgot-password') }}">Quên mật khẩu?</a>
+                    <a href="{{ route('login') }}">Đăng nhập</a>
                 </p>
             </div>
         </div>
